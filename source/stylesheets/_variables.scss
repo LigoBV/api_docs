@@ -21,12 +21,38 @@ under the License.
 // Use these settings to help adjust the appearance of Slate
 
 
+
+$black: #343539;
+$blue: #39a1ff;
+$blue-dark: #30384c;
+$gray-light: #f1f3f7;
+$gray-dark: lighten($black, 20%);
+$green: #d4edda;
+$green-action: #00ca9c;
+$green-ligo: #00e4b7;
+$orange:  #fd7e14;
+$orange-text: #fe805d;
+$red: #dc3545;
+$white: #ffffff;
+
+$background-color: #f1f3f7;
+
+$gradient-blue: linear-gradient(135deg, #00e5b9, #4084de);
+$gradient-green: linear-gradient(120deg, #38f9d7 0%, darken(#43e97b, 10%) 100%);
+$gradient-orange: linear-gradient(40deg, #fc6076 0%, #ff9a44 100%);
+$gradient-red: linear-gradient(to top, darken(#e53935, 10%), lighten(#e35d5b, 3%));
+
+// FONTS
+$font-family-sans-serif:      "Whitney", -apple-system, BlinkMacSystemFont,
+                              "Segoe UI", "Helvetica Neue", Arial, sans-serif
+                              !default;
+
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #2E3336 !default;
-$examples-bg: #2E3336 !default;
-$code-bg: #1E2224 !default;
-$code-annotation-bg: #191D1F !default;
+$nav-bg: $blue-dark;
+$examples-bg: darken($blue-dark, 5%);
+$code-bg: $blue-dark;
+$code-annotation-bg: lighten($blue-dark, 10%);
 $nav-subitem-bg: #1E2224 !default;
 $nav-active-bg: #0F75D4 !default;
 $nav-active-parent-bg: #1E2224 !default; // parent links of the current section
@@ -70,7 +96,8 @@ $phone-width: $tablet-width - $nav-width !default; // min width before reverting
 // FONTS
 ////////////////////
 %default-font {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  // font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Whitney", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   font-size: 14px;
 }
 
