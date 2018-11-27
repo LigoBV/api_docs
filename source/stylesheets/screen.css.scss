@@ -61,7 +61,7 @@ html, body {
   width: $nav-width;
   background-color: $nav-bg;
   font-size: 13px;
-  font-weight: bold;
+  font-weight: 400;
 
   // language selector for mobile devices
   .lang-selector {
@@ -76,7 +76,11 @@ html, body {
   .logo {
     display: block;
     max-width: 100%;
+    margin: auto;
     margin-bottom: $logo-margin;
+    margin-bottom: 50px;
+    margin-top: 25px;
+    max-width: 75px;
   }
 
   &>.search {
@@ -138,9 +142,13 @@ html, body {
   // The Table of Contents is composed of multiple nested
   // unordered lists.  These styles remove the default
   // styling of an unordered list because it is ugly.
+  ul {
+    margin: 10px 20px;
+  }
+
   ul, li {
     list-style: none;
-    margin: 0;
+    // margin: 0;
     padding: 0;
     line-height: 28px;
   }
@@ -154,20 +162,31 @@ html, body {
 
   // This is the currently selected ToC entry
   .toc-link.active {
-    background-color: $nav-active-bg;
+    // background-color: $nav-active-bg;
     color: $nav-active-text;
+    color: $green-ligo;
+    border-bottom: 1px solid $green-ligo;
   }
 
   // this is parent links of the currently selected ToC entry
   .toc-link.active-parent {
     background-color: $nav-active-parent-bg;
+    background-color: darken($blue-dark, 5%);
+    border-radius: 5px;
     color: $nav-active-parent-text;
   }
 
   .toc-list-h2 {
     display: none;
     background-color: $nav-subitem-bg;
-    font-weight: 500;
+    background-color: darken($blue-dark, 5%);
+    border-radius: 5px;
+    font-weight: 300;
+    margin-right: 0 !important;
+
+    > li > a {
+      font-weight: 400;
+    }
   }
 
   .toc-h2 {
@@ -264,7 +283,7 @@ html, body {
   // half of the content always this background color.
   .dark-box {
     width: $examples-width;
-    background-color: $examples-bg;
+    background-color: darken($blue-dark, 10%);
     position: absolute;
     right: 0;
     top: 0;
@@ -279,25 +298,31 @@ html, body {
 }
 
 .lang-selector {
-  background-color: $lang-select-bg;
+  background-color: darken($blue-dark, 5%);
+  // background-color: $lang-select-bg;
   width: 100%;
   font-weight: bold;
   a {
     display: block;
     float:left;
+    font-weight: 400;
     color: $lang-select-text;
     text-decoration: none;
+    margin-top: 5px;
+    margin-left: 5px;
     padding: 0 10px;
     line-height: 30px;
     outline: 0;
 
     &:active, &:focus {
-      background-color: $lang-select-pressed-bg;
+      // background-color: $lang-select-pressed-bg;
+      background-color: lighten($blue-dark, 5%);
       color: $lang-select-pressed-text;
     }
 
     &.active {
-      background-color: $lang-select-active-bg;
+      background-color: lighten($blue-dark, 5%);
+      border-radius: 3px;
       color: $lang-select-active-text;
     }
   }
@@ -348,6 +373,7 @@ html, body {
   h1 {
     @extend %header-font;
     font-size: 25px;
+    font-weight: 300;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
     margin-bottom: $h1-margin-bottom;
