@@ -198,10 +198,10 @@
     </style>
     <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
     <link href="stylesheets/print.css" rel="stylesheet" media="print" />
-      <script src="javascripts/all.js"></script>
+      <script src="javascripts/all_nosearch.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;php&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -214,13 +214,8 @@
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
               <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="php">php</a>
         </div>
-        <div class="search">
-          <input type="text" class="search" id="input-search" placeholder="Search">
-        </div>
-        <ul class="search-results"></ul>
       <ul id="toc" class="toc-list-h1">
           <li>
             <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
@@ -229,16 +224,46 @@
             <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
           </li>
           <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#suppliers" class="toc-h1 toc-link" data-title="Suppliers">Suppliers</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#get-all-suppliers" class="toc-h2 toc-link" data-title="Get All Suppliers">Get All Suppliers</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
+                    <a href="#get-a-specific-supplier" class="toc-h2 toc-link" data-title="Get a Specific Supplier">Get a Specific Supplier</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#customers" class="toc-h1 toc-link" data-title="Customers">Customers</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-customers" class="toc-h2 toc-link" data-title="Get All Customers">Get All Customers</a>
                   </li>
                   <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#get-a-specific-customer" class="toc-h2 toc-link" data-title="Get a Specific Customer">Get a Specific Customer</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#contract-templates" class="toc-h1 toc-link" data-title="Contract Templates">Contract Templates</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-all-contract-templates" class="toc-h2 toc-link" data-title="Get All Contract Templates">Get All Contract Templates</a>
+                  </li>
+                  <li>
+                    <a href="#get-a-specific-contract-template" class="toc-h2 toc-link" data-title="Get a Specific Contract Template">Get a Specific Contract Template</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#contracts" class="toc-h1 toc-link" data-title="Contracts">Contracts</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#get-a-specific-contract" class="toc-h2 toc-link" data-title="Get a specific contract">Get a specific contract</a>
+                  </li>
+                  <li>
+                    <a href="#create-a-contract" class="toc-h2 toc-link" data-title="Create a Contract">Create a Contract</a>
                   </li>
               </ul>
           </li>
@@ -255,190 +280,379 @@
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Welcome to the Ligo API! Automate your documents with Ligo! Generate, track
+revisions, sign, organize, download and more directly from your own 
+applications and tools.</p>
 
-<p>We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
-
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
+<p>We have language bindings in Shell, Ruby, and Php! You can view code examples 
+in the dark area to the right, and you can switch the programming language of 
+the examples with the tabs in the top right.</p>
 <h1 id='authentication'>Authentication</h1>
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s2">"ligo_api"</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="no">LigoApi</span><span class="p">.</span><span class="nf">client_id</span> <span class="o">=</span> <span class="s2">"my_client_id"</span>
+<span class="no">LigoApi</span><span class="p">.</span><span class="nf">client_secret</span> <span class="o">=</span> <span class="s2">"my_client_secret"</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
+<span class="nv">$client_id</span> <span class="o">=</span> <span class="s2">"my_client_id"</span><span class="p">;</span>
+<span class="nv">$client_secret</span> <span class="o">=</span> <span class="s2">"my_client_secret"</span>
+<span class="nx">\LigoApi\Ligo</span><span class="o">::</span><span class="na">setClientCredentials</span><span class="p">(</span><span class="nv">$client_id</span><span class="p">,</span> <span class="nv">$client_secret</span><span class="p">);</span>
 
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  <span class="s1">'https://ligo.nl/oauth/token?client_id=my-client-id&amp;client_secret=my-client-secret&amp;grant_type=client_credentials'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span>
+
+
+<span class="c"># You can then use the received access_token as an authorization Bearer token</span>
+<span class="c"># in the headers. You will need to manage token rotation manually. </span>
 </code></pre>
 <blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
+<p>Make sure to replace <code>client_id</code> and <code>client_secret</code> with your API key.</p>
 </blockquote>
 
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
+<p>Ligo uses API keys to allow access to the API. You can register a new Ligo API 
+key at our <a href="https://ligo.nl/developers">developer portal</a>.</p>
 
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
+<p>Ligo is built on oAuth 2.0. The client credentials are exchanged for short 
+lived access tokens to the API. Our API Libraries will handle the rotation
+for you. It is best to install these where the app boots to prevent 
+instantiating on every request.</p>
 
 <aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
+You must replace <code>client_id</code> and <code>client_secret</code> with 
+your personal API key.
 </aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h1 id='suppliers'>Suppliers</h1><h2 id='get-all-suppliers'>Get All Suppliers</h2><pre class="highlight ruby tab-ruby"><code><span class="n">suppliers</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">Supplier</span><span class="p">.</span><span class="nf">all</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
+<span class="nv">$suppliers</span> <span class="o">=</span> <span class="nx">\LigoApi\Supplier</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+<span class="nv">$supplier</span> <span class="o">=</span> <span class="nv">$suppliers</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="nv">$supplier</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://www.ligo.nl/api/suppliers <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"suppliers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19b5e45d-3974-48c4-896f-21341a32e793"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier 1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19b5e45d-3974-48c4-896f-21341a32e793"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Supplier 2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
+<p>This endpoint retrieves all suppliers. Suppliers are a record intended to 
+organize your contracts. If you are purchasing an item or a service from a 
+party it is best to add it as a supplier.</p>
 <h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
-</tr>
-<tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
-</tr>
-</tbody></table>
+<p><code>GET https://www.ligo.nl/api/suppliers</code></p>
+<h2 id='get-a-specific-supplier'>Get a Specific Supplier</h2><pre class="highlight ruby tab-ruby"><code><span class="n">suppliers</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">Supplier</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span> 
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<span class="nv">$supplier</span> <span class="o">=</span> <span class="nx">\LigoApi\Supplier</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="s2">"2083e5f8-61f5-4726-beda-5ca9d7224a25"</span><span class="p">);</span>
+<span class="nv">$supplier</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span> <span class="c1">// My Supplier
+</span></code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://ligo.nl/api/suppliers/19b5e45d-3974-48c4-896f-21341a32e793 <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span> <span class="se">\</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c"># replace the id with the id of the supplier</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+  </span><span class="s2">"supplier"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19b5e45d-3974-48c4-896f-21341a32e793"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Supplier"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
+<p>This endpoint retrieves a specific supplier.</p>
+<h1 id='customers'>Customers</h1><h2 id='get-all-customers'>Get All Customers</h2><pre class="highlight ruby tab-ruby"><code><span class="n">suppliers</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">all</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+<span class="nv">$customers</span> <span class="o">=</span> <span class="nx">\LigoApi\Customer</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+<span class="nv">$customer</span> <span class="o">=</span> <span class="nv">$customers</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="nv">$customer</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://www.ligo.nl/api/customers <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"customers"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19b5e45d-3974-48c4-896f-21341a32e793"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer 1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19b5e45d-3974-48c4-896f-21341a32e793"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer 2"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all customers. Customers are a record intended to 
+organize your contracts. If you are selling an item or a service from a 
+party it is best to add it as a customer.</p>
 <h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
-</tr>
-</tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<p><code>GET https://www.ligo.nl/api/customers</code></p>
+<h2 id='get-a-specific-customer'>Get a Specific Customer</h2><pre class="highlight ruby tab-ruby"><code><span class="n">customer</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">Customer</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">customer</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># My Customer</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span> 
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+<span class="nv">$customer</span> <span class="o">=</span> <span class="nx">\LigoApi\Customer</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="s2">"2083e5f8-61f5-4726-beda-5ca9d7224a25"</span><span class="p">);</span>
+<span class="nv">$customer</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span> <span class="c1">// My Customer
+</span></code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://ligo.nl/api/customers/19b5e45d-3974-48c4-896f-21341a32e793 <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span> <span class="se">\</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
+<span class="c"># replace the id with the id of the customer</span>
 </code></pre>
 <blockquote>
 <p>The above command returns JSON structured like this:</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
+  </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"19b5e45d-3974-48c4-896f-21341a32e793"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Customer"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
-</tr>
-</tbody></table>
-<h1 id='errors'>Errors</h1>
-<aside class="notice">
-This error section is stored in a separate file in <code>includes/_errors.md</code>. Slate allows you to optionally separate out your docs into many files...just save them to the <code>includes</code> folder and add them to the top of your <code>index.md</code>'s frontmatter. Files are included in the order listed.
-</aside>
+<p>This endpoint retrieves a specific customer.</p>
+<h1 id='contract-templates'>Contract Templates</h1>
+<p>Contract templates are created within your Ligo Dashboard. Each type of 
+contract is identified by a unique slug called <code>template_type</code>. For
+each template type you may have a variety of contracts based on country and
+language. For instance, you may have an NDA for the Netherlands in English and
+Dutch as well as an NDA for Spain in Spanish. You will need to determine
+which contract template you want to use when creating a contract.</p>
+<h2 id='get-all-contract-templates'>Get All Contract Templates</h2><pre class="highlight ruby tab-ruby"><code><span class="n">templates</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">ContractTemplate</span><span class="p">.</span><span class="nf">all</span>
+<span class="n">template</span> <span class="o">=</span> <span class="n">templates</span><span class="p">.</span><span class="nf">first</span>
+<span class="n">template</span><span class="p">.</span><span class="nf">name</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
 
-<p>The Kittn API uses the following error codes:</p>
+<span class="nv">$templates</span> <span class="o">=</span> <span class="nx">\LigoApi\ContractTemplate</span><span class="o">::</span><span class="na">all</span><span class="p">();</span>
+<span class="nv">$template</span> <span class="o">=</span> <span class="nv">$templates</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="nv">$template</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://www.ligo.nl/api/contract_templates <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"contract_templates"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"f36214d7-4cd5-4b62-9ba8-55b1f1e9dcc8"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Oproepcontract 0 uren Engels"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nl"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"template_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"zero_hours_employment_agreement"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-20T10:13:25.143+01:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-09T12:23:39.139+01:00"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"263f505c-938e-45c6-ad00-d7f9c5c08d6a"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Mobile Phone Agreement"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"NL"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nl"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"template_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mobile_phone_agreement"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-10-25T18:45:06.494+02:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-09T12:23:39.221+01:00"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves all your contract templates. You can use this to 
+determine which template you want to use when generating a contract. You can
+either identify a contract based on <code>template_type</code>, 
+<code>language</code>, and <code>country</code> or the <code>id</code> of the
+template.</p>
+<h3 id='http-request-3'>HTTP Request</h3>
+<p><code>GET https://www.ligo.nl/api/contract_templates</code></p>
+<h2 id='get-a-specific-contract-template'>Get a Specific Contract Template</h2><pre class="highlight ruby tab-ruby"><code><span class="n">template</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">ContractTemplate</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">template</span><span class="p">.</span><span class="nf">name</span> <span class="c1"># Mobile Phone Agreement</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span> 
+
+<span class="nv">$template</span> <span class="o">=</span> <span class="nx">\LigoApi\ContractTemplate</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+<span class="nv">$template</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span> <span class="c1">// Mobile Phone Agreement
+</span></code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://ligo.nl/api/contract_templates/19b5e45d-3974-48c4-896f-21341a32e793 <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span> <span class="se">\</span>
+
+<span class="c"># replace the id with the id of the customer</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"contract_template"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"90cf8619-5244-4cf0-ba68-5085377ef736"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Laptop Agreement"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"country"</span><span class="p">:</span><span class="w"> </span><span class="s2">"nl"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"language"</span><span class="p">:</span><span class="w"> </span><span class="s2">"en"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"template_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"laptop_agreement"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-11-26T14:37:30.861+01:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-09T12:23:39.147+01:00"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint retrieves a specific contract template.</p>
+<h1 id='contracts'>Contracts</h1>
+<p>The contracts endpoint allows you to merge your templates with data from your
+own application. Once we create the document, Ligo will handle everything else
+for you. We will return the contract to you in HTML form immediately. It could
+take up to a few minutes for the documents in word and pdf format as well as
+preview images to generate. We will send you a notification when it is done!</p>
+<h2 id='get-a-specific-contract'>Get a specific contract</h2><pre class="highlight ruby tab-ruby"><code><span class="n">contract</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">Contract</span><span class="p">.</span><span class="nf">find</span><span class="p">(</span><span class="nb">id</span><span class="p">)</span>
+<span class="n">contract</span><span class="p">.</span><span class="nf">name</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span>
+
+<span class="nv">$contract</span> <span class="o">=</span> <span class="nx">\LigoApi\Contract</span><span class="o">::</span><span class="na">find</span><span class="p">(</span><span class="nv">$id</span><span class="p">);</span>
+<span class="nv">$contract</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">;</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X GET <span class="se">\</span>
+  https://www.ligo.nl/api/contracts/my-id-of-the-contract <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"contract"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"da94452e-a5f2-4d27-b468-90c534c0c627"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;This is my document in HTML form&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-22T03:28:36.248+01:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"documents_generating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"expiration_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your custom name here"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pdf_document_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"pdf_signed_document_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"png_image_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-22T03:28:36.248+01:00"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"word_document_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint will return details about a specific template. Since document and
+image generation may take a few moments after creating some of the data may
+at first be blank. You can use our webhooks to ensure you get updated as soon
+as your documents are ready. </p>
+<h3 id='http-request-4'>HTTP Request</h3>
+<p><code>GET https://www.ligo.nl/api/contracts/my-contract-id</code></p>
+<h2 id='create-a-contract'>Create a Contract</h2><pre class="highlight ruby tab-ruby"><code><span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="ss">name: </span><span class="s2">"My Contract Name"</span><span class="p">,</span>
+  <span class="ss">template_id: </span><span class="s2">"955744b4-fbe8-49b0-930b-a725597f8714"</span><span class="p">,</span>
+  <span class="ss">participants: </span><span class="vg">$participants</span><span class="p">,</span>
+  <span class="ss">context: </span><span class="p">{</span> 
+    <span class="ss">variable_1: </span><span class="s2">"this is your variable"</span><span class="p">,</span>
+    <span class="ss">variable_2: </span><span class="p">{</span> 
+      <span class="ss">liquid: </span><span class="s2">"we use liquid for templating, you can use nested hashes too"</span>
+    <span class="p">},</span>
+    <span class="ss">counts: </span><span class="p">[</span>
+      <span class="s2">"arrays work as well"</span><span class="p">,</span> 
+      <span class="s2">"another string"</span><span class="p">,</span> 
+      <span class="s2">"yet another string"</span>
+    <span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">contract</span> <span class="o">=</span> <span class="no">LigoApi</span><span class="o">::</span><span class="no">Contract</span><span class="p">.</span><span class="nf">create</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+</code></pre><pre class="highlight php tab-php"><code><span class="cp">&lt;?php</span> 
+
+<span class="nv">$participants</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+  <span class="mi">0</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="s2">"type"</span> <span class="o">=&gt;</span> <span class="s2">"Customer"</span><span class="p">,</span> <span class="s2">"id"</span> <span class="o">=&gt;</span> <span class="s2">"d74b9f62-5fb4-48e2-ac58-b77b213a2d3f"</span><span class="p">),</span> 
+  <span class="mi">1</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="s2">"type"</span> <span class="o">=&gt;</span> <span class="s2">"Supplier"</span><span class="p">,</span> <span class="s2">"id"</span> <span class="o">=&gt;</span> <span class="s2">"19b5e45d-3974-48c4-896f-21341a32e793"</span><span class="p">),</span>
+<span class="p">);</span>
+
+<span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+  <span class="s2">"name"</span> <span class="o">=&gt;</span> <span class="s2">"My Contract Name"</span><span class="p">,</span>
+  <span class="s2">"template_id"</span> <span class="o">=&gt;</span> <span class="s2">"955744b4-fbe8-49b0-930b-a725597f8714"</span><span class="p">,</span>
+  <span class="s2">"participants"</span> <span class="o">=&gt;</span> <span class="nv">$participants</span><span class="p">,</span>
+  <span class="s2">"context"</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s2">"variable_1"</span> <span class="o">=&gt;</span> <span class="s2">"this is your variable"</span><span class="p">,</span>
+    <span class="s2">"variable_2"</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+      <span class="s2">"liquid"</span> <span class="o">=&gt;</span> <span class="s2">"we use liquid for templating, you can use nested hashes too"</span>
+    <span class="p">),</span>
+    <span class="s2">"counts"</span> <span class="o">=&gt;</span> <span class="nb">array_values</span><span class="p">(</span>
+      <span class="k">array</span><span class="p">(</span><span class="s2">"arrays work as well"</span><span class="p">,</span> <span class="s2">"another string"</span><span class="p">,</span> <span class="s2">"yet another string"</span><span class="p">)</span>
+    <span class="p">)</span>
+  <span class="p">)</span>
+<span class="p">);</span>
+
+<span class="nx">\LigoApi\Contract</span><span class="o">::</span><span class="na">create</span><span class="p">(</span><span class="nv">$params</span><span class="p">);</span>
+</code></pre><pre class="highlight shell tab-shell"><code>curl -X POST <span class="se">\</span>
+  http://ligo.local:3000/api/contracts <span class="se">\</span>
+  -H <span class="s1">'Authorization: Bearer your-bearer-token'</span> <span class="se">\</span>
+  -H <span class="s1">'Content-Type: application/json'</span> <span class="se">\</span>
+  -H <span class="s1">'cache-control: no-cache'</span> <span class="se">\</span>
+  -d <span class="s1">'{ 
+        "contract": {
+          "name": "Your custom name here",
+          "template_type": "my_custom_contract",
+          "language": "en",
+          "country": "nl",
+          "template_id": "955744b4-fbe8-49b0-930b-a725597f8714",
+          "participants": [
+            { "type": "Customer", "id": "d74b9f62-5fb4-48e2-ac58-b77b213a2d3f" },
+            { "type": "Supplier", "id": "19b5e45d-3974-48c4-896f-21341a32e793" }
+          ],
+          "context": {
+            "variable_1": "these are your custom variables",
+            "liquid": {
+              "nesting": "we use liquid for templating, you can use nested hashes too"
+            },
+            "counts": ["arrays work as well", "another string", "another string"]
+          }
+        } 
+      }
+  '</span>
+</code></pre>
+<blockquote>
+<p>The above command returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"contract"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"da94452e-a5f2-4d27-b468-90c534c0c627"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content"</span><span class="p">:</span><span class="w"> </span><span class="s2">"&lt;p&gt;This is my contract in html format&lt;/p&gt;"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-22T03:28:36.248+01:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"documents_generating"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"expiration_date"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your custom name here"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pdf_document_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"pdf_signed_document_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"png_image_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-12-22T03:28:36.248+01:00"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"word_document_url"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>This endpoint creates a contract. When creating a contract you can give it an
+expiration date. You will receive webhooks when the contract is expiring. </p>
+
+<p>Contracts can also be tied to other entities like Employees, Suppliers and 
+Customers. This allows organization directly within the Ligo dashboard and the
+ability to quickly search and filter the contracts. See the appropriate 
+sections for more details on creating these objects.</p>
+
+<p>Document generation for contracts does not happen immediately. To prevent long
+request times these are processed asynchronously. It is possible to set up
+the webhooks to receive events at which point you can retrieve the documents.</p>
+<h1 id='errors'>Errors</h1>
+<p>The Ligo API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -497,8 +711,7 @@ This error section is stored in a separate file in <code>includes/_errors.md</co
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
                 <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="php">php</a>
           </div>
       </div>
     </div>
